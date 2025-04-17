@@ -181,3 +181,108 @@ document.addEventListener('DOMContentLoaded', function() {
         nextButton.style.display = 'none';
     }
 });
+function openModal(cardType) {
+    const modal = document.getElementById('modal');
+    const modalBody = document.getElementById('modal-body');
+    
+    let content = '';
+    
+    switch(cardType) {
+        case 'date-card1':
+            content = `
+                <h2>26th January 1950 - Constitution Day</h2>
+                <p>The Constitution of India was adopted by the Constituent Assembly on 26 November 1949, and came into effect on 26 January 1950. The date 26 January was chosen to commemorate the Purna Swaraj declaration of independence of 1930.</p>
+                <p>The Constitution replaced the Government of India Act 1935 as the country's fundamental governing document, and the Dominion of India became the Republic of India.</p>
+                <p>Dr. Rajendra Prasad became the first President of India. The Constitution declares India a sovereign, socialist, secular, democratic republic, assuring its citizens justice, equality and liberty.</p>
+            `;
+            break;
+            
+        case 'article-card1':
+            content = `
+                <h2>Article 21: Protection of Life and Personal Liberty</h2>
+                <p><strong>Text:</strong> "No person shall be deprived of his life or personal liberty except according to procedure established by law."</p>
+                <h3>Key Interpretations:</h3>
+                <ul>
+                    <li>Right to live with human dignity</li>
+                    <li>Right to clean environment</li>
+                    <li>Right to privacy</li>
+                    <li>Right to shelter</li>
+                    <li>Right to health</li>
+                </ul>
+                <p>This article has been the basis for numerous landmark judgments that have expanded the scope of fundamental rights in India.</p>
+            `;
+            break;
+            
+        case 'timeline-card1':
+            content = `
+                <h2>Major Constitutional Amendments Timeline</h2>
+                <div class="modal-timeline">
+                    <div class="modal-timeline-item">
+                        <div class="modal-timeline-date">1951</div>
+                        <div class="modal-timeline-content">First Amendment: Added Ninth Schedule to protect land reform laws</div>
+                    </div>
+                    <div class="modal-timeline-item">
+                        <div class="modal-timeline-date">1971</div>
+                        <div class="modal-timeline-content">24th Amendment: Affirmed Parliament's power to amend any part of the Constitution</div>
+                    </div>
+                    <div class="modal-timeline-item">
+                        <div class="modal-timeline-date">1976</div>
+                        <div class="modal-timeline-content">42nd Amendment: Added Fundamental Duties, made India "Socialist Secular"</div>
+                    </div>
+                    <div class="modal-timeline-item">
+                        <div class="modal-timeline-date">1992</div>
+                        <div class="modal-timeline-content">73rd & 74th Amendments: Constitutional status to Panchayati Raj institutions</div>
+                    </div>
+                    <div class="modal-timeline-item">
+                        <div class="modal-timeline-date">2019</div>
+                        <div class="modal-timeline-content">103rd Amendment: 10% reservation for Economically Weaker Sections</div>
+                    </div>
+                </div>
+            `;
+            break;
+            
+        case 'amendment-card1':
+            content = `
+                <h2>104th Constitutional Amendment (2020)</h2>
+                <h3>Key Provisions:</h3>
+                <ul>
+                    <li>Extended reservation for SC/STs in Lok Sabha and State Assemblies for 10 more years (until 2030)</li>
+                    <li>Removed the reserved seats for Anglo-Indians in Lok Sabha and State Assemblies</li>
+                </ul>
+                <h3>Background:</h3>
+                <p>The amendment was passed to continue affirmative action for Scheduled Castes and Scheduled Tribes while doing away with the Anglo-Indian reservation which was based on historical context that was no longer relevant.</p>
+                <p>The reservation for SC/STs in Parliament and State Assemblies was first implemented in 1950 and has been extended every 10 years since then.</p>
+            `;
+            break;
+    }
+    
+    modalBody.innerHTML = content;
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'none';
+    
+    // Re-enable scrolling
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside content
+window.onclick = function(event) {
+    const modal = document.getElementById('modal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    const modal = document.getElementById('modal');
+    if (event.key === 'Escape' && modal.style.display === 'block') {
+        closeModal();
+    }
+});
+
+// Add this CSS for modal timeline

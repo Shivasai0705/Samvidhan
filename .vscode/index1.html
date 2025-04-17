@@ -3,129 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samvidhan - Constitutional Learning</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-    <link rel="icon" href="logo.webp" type="image/x-icon">
     <link rel="stylesheet" href="style1.css">
-    <title>Samvidhan-Games</title>
+    <link rel="icon" href="logo.webp" type="image/x-icon">
 </head>
 <body>
     <nav>
-        <div class="logo" style="display: flex; align-items: center; gap: 10px;">
-            <a href="#"><img src="./images/login_logo.png" alt="SAMVIDHAN" style="height: 85px;"></a>
-            <div class="app-name" style="font-size: 24px; font-weight: bold;">SAMVIDHAN </div>
+        <div class="logo">
+            <a href="#"><img src="./images/login_logo.png" alt="SAMVIDHAN"></a>
+            <div class="app-name">SAMVIDHAN</div>
         </div>
-        
         <ul>
             <li><a href="index.html">Home</a></li>
-          
-
+            <li><a href="#">About</a></li>
         </ul>
     </nav>
 
-    <!--hero section--> 
+    <!-- Hero Section -->
     <div class="card">
         <div class="text-section">
-            <h2 style="font-size: 75px;">Welcome to Samvidhan..! Constitutional Learning</h2>
-            <p id="typing-text" style="margin-top: -20px;"></p>
+            <h2>Welcome to<br>Samvidhan..!<br>Constitutional<br>Learning</h2>
+            <p id="typing-text"></p>
         </div>
         <div class="carousel-section">
             <div class="carousel-container">
                 <div class="carousel-slide">
-                    <img src="./images/samlogo.jpg" alt="Image 3">
+                    <img src="./images/samlogo.jpg" alt="Samvidhan Logo">
                 </div>
                 <div class="carousel-slide">
-                    <img src="./images/indianconstitution.webp" alt="Image 2">
+                    <img src="./images/indianconstitution.webp" alt="Indian Constitution">
                 </div>
             </div>
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+            <button class="next" onclick="plusSlides(1)">&#10095;</button>
         </div>
-    </div> 
+    </div>
 
-    <!--Card Section-->
-    <h1 style="text-align: center; margin-top: 50px; font-size: 50px;">Featured Games</h1>
+    <!-- Featured Games -->
+    <h1 class="section-title">Featured Games</h1>
     <div class="card-section1">
-        <!-- Card 1 --> 
         <div class="custom-card">
-            <a href="startGame.html" >
-                <img src="./images/vicecity.webp" alt="Image 1" class="custom-card-image">
+            <a href="startGame.html">
+                <img src="./images/vicecity.webp" alt="Game 1" class="custom-card-image">
                 <video class="custom-card-video" src="./images/intro.mp4" muted autoplay loop></video>
             </a>
         </div>
-        
-        <!-- Card 2 -->
-        <div class="custom-card"> 
-            <a href="startnavigator.html" >
-                <img src="./images/civicnavigator.webp" alt="Image 2" class="custom-card-image">
+        <div class="custom-card">
+            <a href="startnavigator.html">
+                <img src="./images/civicnavigator.webp" alt="Game 2" class="custom-card-image">
                 <video class="custom-card-video" src="./images/navigator.mp4" muted autoplay loop></video>
             </a>
         </div>
-        <!-- Card 3 -->
         <div class="custom-card">
-            <a href="spinthewheel.html" >
-                <img src="./images/spinthewheel.webp" alt="Image 3" class="custom-card-image">
+            <a href="spinthewheel.html">
+                <img src="./images/spinthewheel.webp" alt="Game 3" class="custom-card-image">
                 <video class="custom-card-video" src="./images/spingame.mp4" muted autoplay loop></video>
             </a>
         </div>
     </div>
 
     <!-- Features Section -->
-    <div class="features-section">
-        <h1 style="text-align: center; font-size: 50px;">Our Key Features</h1> 
-        <div class="card-section1">
-            <div class="feature-card">
-                <img src="./images/interactivequiz.jpeg" alt="Interactive Quiz" />
-                <div class="feature-overlay">
-                    <h3>Interactive Quiz</h3>
-                </div>
+    <h1 class="section-title">Our Key Features</h1>
+    <div class="card-section1">
+        <div class="feature-card">
+            <img src="./images/interactivequiz.jpeg" alt="Interactive Quiz">
+            <div class="feature-overlay">
+                <h3>Interactive Quiz</h3>
             </div>
-            <div class="feature-card">
-                <img src="./images/educationalgame.jpeg" alt="Educational Game" />
-                <div class="feature-overlay">
-                    <h3>Educational Games</h3>
-                </div>
+        </div>
+        <div class="feature-card">
+            <img src="./images/educationalgame.jpeg" alt="Educational Game">
+            <div class="feature-overlay">
+                <h3>Educational Games</h3>
             </div>
-            <div class="feature-card">
-                <img src="./images/game.jpeg" alt="Game" />
-                <div class="feature-overlay">
-                    <h3>Fun Games</h3>
-                </div>
+        </div>
+        <div class="feature-card">
+            <img src="./images/game.jpeg" alt="Game">
+            <div class="feature-overlay">
+                <h3>Fun Games</h3>
             </div>
-            <div class="feature-card">
-                <img src="./images/rewards.png" alt="Rewards" />
-                <div class="feature-overlay">
-                    <h3>Rewards</h3>
-                </div>
+        </div>
+        <div class="feature-card">
+            <img src="./images/rewards.png" alt="Rewards">
+            <div class="feature-overlay">
+                <h3>Rewards</h3>
             </div>
         </div>
     </div>
 
+    <!-- How It Works -->
     <section class="how-it-works">
         <h2 class="how-it-works-heading">How It Works</h2>
         <div class="steps-container">
             <div class="step-card">
                 <div class="step-icon">🎥</div>
                 <h3 class="step-title">Watch the Video</h3>
-                <p class="step-description">Start by watching an introductory video that explains the basics of the Indian Constitution.</p>
+                <p class="step-description">Start by watching an introductory video about the Indian Constitution.</p>
             </div>
             <div class="step-card">
                 <div class="step-icon">📚</div>
                 <h3 class="step-title">Learn the Concepts</h3>
-                <p class="step-description">Explore interactive content and resources to deepen your understanding of the Constitution.</p>
+                <p class="step-description">Explore interactive content about the Constitution.</p>
             </div>
             <div class="step-card">
                 <div class="step-icon">🎮</div>
                 <h3 class="step-title">Play the Games</h3>
-                <p class="step-description">Engage with quizzes and games to test your knowledge and earn rewards.</p>
+                <p class="step-description">Test your knowledge through fun games and quizzes.</p>
             </div>
-            
         </div>
     </section>
+<script>
+    // Typing Effect
+const typingText = document.getElementById('typing-text');
+const textToType = "Discover the foundation of India's democracy";
+let charIndex = 0;
 
+function typeText() {
+    if (charIndex < textToType.length) {
+        typingText.textContent += textToType.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeText, 100);
+    }
+}
+
+// Carousel Functionality
+let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const container = document.querySelector('.carousel-container');
+
+function showSlide(index) {
+    if (index >= slides.length) {
+        currentSlide = 0;
+    } else if (index < 0) {
+        currentSlide = slides.length - 1;
+    } else {
+        currentSlide = index;
+    }
+    container.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+
+function plusSlides(n) {
+    showSlide(currentSlide + n);
+}
+
+// Initialize when page loads
+window.onload = function() {
+    typeText();
+    showSlide(0);
+    
+    // Auto-advance every 5 seconds
+    setInterval(() => plusSlides(1), 5000);
+};
+</script>
     <script src="script.js"></script>
-    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 </body>
 </html>
