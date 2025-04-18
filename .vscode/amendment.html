@@ -1,380 +1,460 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
-    <title>Samvidhan: Amendment Match</title>
-    <style>
-     body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #000000;
-    font-family: "Fjalla One", system-ui;
-    color: #2d3748;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <title>Samvidhan: Amendment Match</title>
+  <style>
+    :root {
+      --primary: #16b8ab;
+      --secondary: #0d9488;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --accent: #f59e0b;
+    }
 
-.header {
-    text-align: center;
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background-color: var(--dark);
+      font-family: "Poppins", sans-serif;
+      color: var(--light);
+    }
 
-}
+    .header {
+      text-align: center;
+      padding: 20px;
+      width: 100%;
+      max-width: 1200px;
+    }
 
-.header h1 {
-    color: #ffffff; /* Blue */
-    font-size: 2rem;
-    margin-top: 5px;;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.08);
-}
+    .header h1 {
+      color: var(--primary);
+      font-family: "Fjalla One", sans-serif;
+      font-size: 2.5rem;
+      margin: 10px 0;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
 
-.header p {
-    color: #16b8ab;
-    max-width: 600px;
- margin: 15px;
-    font-size: 0.9rem;
-}
+    .header p {
+      color: var(--light);
+      max-width: 600px;
+      margin: 0 auto 20px;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
 
-.game-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-}
+    .game-area {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      width: 100%;
+      max-width: 1200px;
+      padding: 20px;
+    }
 
-.memory-card {
-    width: 120px;
-    height: 120px;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.5s ease-out, box-shadow 0.3s ease;
-    cursor: pointer;
-    perspective: 1000px;
-}
-
-.memory-card:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-}
-
-.memory-card.flipped {
-    transform: rotateY(180deg);
-}
-
-.card-front, .card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 12px;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
-}
-
-.card-front {
-    background: linear-gradient(135deg, #4299e1, #2b6cb0); /* Blue gradient */
-    color: white;
-    border: none;
-    box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
-}
-
-.card-back {
-    background: white;
-    color: #2d3748;
-    transform: rotateY(180deg);
-    font-size: 0.8rem;
-    line-height: 1.4;
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card-front span {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.stats {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    max-width: 500px;
-    margin: 15px auto;
-    font-size: 0.9rem;
-    background: white;
-    padding: 12px 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.stats div {
-    text-align: center;
-}
-
-.stats span {
-    font-size: 1.3rem;
-    color: #2b6cb0;
-    display: block;
-    font-weight: bold;
-}
-
-.restart-btn {
-    background: #4299e1;
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 25px;
-    margin-top: 25px;
-    cursor: pointer;
-    font-family: "Fjalla One";
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 3px 6px rgba(66, 153, 225, 0.3);
-    font-size: 0.9rem;
-    letter-spacing: 0.5px;
-}
-
-.restart-btn:hover {
-    background: #3182ce;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 12px rgba(66, 153, 225, 0.4);
-}
-
-/* Google Translate widget styling */
-#google_translate_element {
-    margin: 15px;
-    align-self: flex-end;
-}
-
-.goog-te-gadget {
-    font-family: "Fjalla One" !important;
-}
-
-.goog-te-menu-value {
-    color: #2b6cb0 !important;
-}
-
-.goog-te-menu-value span {
-    color: #2b6cb0 !important;
-}
-
-.goog-te-gadget .goog-te-combo {
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #cbd5e0;
-}
-
-@media (max-width: 600px) {
     .game-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      width: 600px;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(4px);
+    }
+
+    .memory-card {
+      width: 120px;
+      height: 120px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      perspective: 1000px;
+      border-radius: 12px;
+    }
+
+    .memory-card:hover {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .memory-card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 15px;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .card-front {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .card-front::before {
+      content: attr(data-number);
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .card-front::after {
+      content: "Amendment";
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .card-back {
+      background: white;
+      color: var(--dark);
+      transform: rotateY(180deg);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      overflow: hidden;
+      font-weight: 500;
+    }
+
+    .info-panel {
+      width: 400px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(4px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-title {
+      font-family: "Fjalla One", sans-serif;
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 10px;
+    }
+
+    .info-content {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+
+    .info-content p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .info-highlight {
+      background-color: rgba(22, 184, 171, 0.2);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      border-left: 4px solid var(--primary);
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 5px 3px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .stats div {
+      text-align: center;
+      flex: 1;
+    }
+
+    .stats span {
+      font-size: 1.5rem;
+      color: var(--accent);
+      font-weight: bold;
+      font-family: "Fjalla One", sans-serif;
+    }
+
+    .restart-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 30px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-family: "Fjalla One", sans-serif;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .restart-btn:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+    }
+
+    .matched::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(22, 184, 171, 0.3);
+      z-index: 10;
+      border-radius: 12px;
+    }
+
+    @media (max-width: 1100px) {
+      .game-area {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .info-panel {
+        width: 600px;
+        margin-top: 20px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .game-container {
         grid-template-columns: repeat(3, 1fr);
-        max-width: 400px;
+        width: 100%;
         padding: 15px;
         gap: 10px;
-    }
-    
-    .memory-card {
+      }
+
+      .memory-card {
         width: 100px;
         height: 100px;
+      }
+
+      .info-panel {
+        width: 100%;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .card-back {
+        font-size: 0.8rem;
+      }
     }
-    
-    .header h1 {
-        font-size: 1.6rem;
+
+    @media (max-width: 480px) {
+      .game-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stats span {
+        font-size: 1.2rem;
+      }
+
+      .header h1 {
+        font-size: 1.8rem;
+      }
     }
-    
-    .card-back {
-        font-size: 0.7rem;
-        padding: 8px;
-    }
-    
-    .stats {
-        padding: 10px;
-        margin: 20px auto;
-    }
-    
-    .restart-btn {
-        padding: 8px 20px;
-        margin-top: 20px;
-    }
-}
-    </style>
+  </style>
 </head>
 <body>
-    <div id="google_translate_element"></div>
-    
-    <div class="header">
-        <h1>Amendment Match Game</h1>
-        <p>Match the amendment numbers with their descriptions</p>
-    </div>
+  <div class="header">
+    <h1>Constitution Match Challenge</h1>
+    <p>Match the amendment numbers to their descriptions</p>
+  </div>
 
-    <div class="stats">
+  <div class="game-area">
+    <div class="game-container" id="gameContainer"></div>
+
+    <div class="info-panel">
+      <div class="stats">
         <div>Moves: <span id="moves">0</span></div>
-        <div>Matches: <span id="matches">0</span>/6</div>
+        <div>Matches: <span id="matches">0</span>/4</div>
+      </div>
+      <div class="info-title">Amendment Details</div>
+      <div class="info-content" id="infoContent">
+        <p>Match two cards to reveal information about important constitutional amendments.</p>
+        <div class="info-highlight">Each match will display detailed information about the amendment.</div>
+      </div>
+      <button class="restart-btn" onclick="startGame()">Restart Game</button>
     </div>
+  </div>
 
-    <div class="game-container" id="gameContainer">
-        <!-- Cards will be inserted here by JavaScript -->
-    </div>
+  <script>
+    // Reduced the number of amendments to make it easier
+    const amendmentData = [
+      {
+        id: "first",
+        number: "1st",
+        title: "First Amendment (1951)",
+        shortDesc: "Added Ninth Schedule",
+        description: "The First Amendment added the Ninth Schedule to protect land reform laws from judicial review. It also introduced restrictions on free speech and extended affirmative action.",
+        impact: "Enabled land reforms and protected social justice laws."
+      },
+      {
+        id: "fortysecond",
+        number: "42nd",
+        title: "42nd Amendment (1976)",
+        shortDesc: "The 'Mini-Constitution'",
+        description: "Introduced during Emergency; added 'Socialist', 'Secular' to the Preamble, introduced Fundamental Duties, and gave more power to the Central Government.",
+        impact: "Made extensive structural changes to the Constitution."
+      },
+      {
+        id: "seventythird",
+        number: "73rd",
+        title: "73rd Amendment (1992)",
+        shortDesc: "Panchayati Raj",
+        description: "Constitutionalized Panchayati Raj Institutions, ensuring local governance and representation for SC/ST and women.",
+        impact: "Strengthened grassroots democracy in India."
+      },
+      {
+        id: "onehundredfirst",
+        number: "101st",
+        title: "101st Amendment (2016)",
+        shortDesc: "Introduced GST",
+        description: "Launched Goods and Services Tax replacing many indirect taxes. Created GST Council for coordination.",
+        impact: "Unified Indian market under a single tax regime."
+      }
+    ];
 
-    <button class="restart-btn" onclick="startGame()">Restart Game</button>
+    let cards = [], hasFlippedCard = false, lockBoard = false;
+    let firstCard, secondCard;
+    let moves = 0, matches = 0, matchedPairs = [];
 
-    <script>
-        // Amendment data (pairs)
-        const amendmentPairs = [
-            {
-                number: "1st",
-                description: "Added Ninth Schedule (1951)"
-            },
-            {
-                number: "42nd",
-                description: "Mini-Constitution (1976)"
-            },
-            {
-                number: "44th",
-                description: "Undid 42nd changes (1978)"
-            },
-            {
-                number: "52nd",
-                description: "Anti-Defection Law (1985)"
-            },
-            {
-                number: "73rd",
-                description: "Panchayati Raj (1992)"
-            },
-            {
-                number: "101st",
-                description: "GST Implementation (2016)"
-            }
-        ];
+    function createCards() {
+      const gameContainer = document.getElementById("gameContainer");
+      gameContainer.innerHTML = "";
+      cards = [];
 
-        let cards = [];
-        let hasFlippedCard = false;
-        let lockBoard = false;
-        let firstCard, secondCard;
-        let moves = 0;
-        let matches = 0;
+      const gameCards = [...amendmentData, ...amendmentData].sort(() => 0.5 - Math.random());
 
-        // Duplicate the pairs to create matches
-        function createCards() {
-            const gameContainer = document.getElementById('gameContainer');
-            gameContainer.innerHTML = '';
-            
-            // Create doubled array and shuffle
-            const gameCards = [...amendmentPairs, ...amendmentPairs]
-                .sort(() => 0.5 - Math.random());
-            
-            gameCards.forEach((card, index) => {
-                const memoryCard = document.createElement('div');
-                memoryCard.classList.add('memory-card');
-                memoryCard.dataset.index = index;
-                memoryCard.dataset.number = card.number;
-                
-                memoryCard.innerHTML = `
-                    <div class="card-front"><span>${card.number}</span></div>
-                    <div class="card-back">${card.description}</div>
-                `;
-                
-                memoryCard.addEventListener('click', flipCard);
-                gameContainer.appendChild(memoryCard);
-                cards.push(memoryCard);
-            });
-        }
+      gameCards.forEach(card => {
+        const memoryCard = document.createElement("div");
+        memoryCard.classList.add("memory-card");
+        memoryCard.dataset.id = card.id;
+        memoryCard.innerHTML = `
+          <div class="card-front" data-number="${card.number}"></div>
+          <div class="card-back">${card.shortDesc}</div>
+        `;
+        memoryCard.addEventListener("click", flipCard);
+        gameContainer.appendChild(memoryCard);
+        cards.push(memoryCard);
+      });
+    }
 
-        function flipCard() {
-            if (lockBoard) return;
-            if (this === firstCard) return;
-            
-            this.classList.add('flipped');
-            
-            if (!hasFlippedCard) {
-                // First click
-                hasFlippedCard = true;
-                firstCard = this;
-                return;
-            }
-            
-            // Second click
-            secondCard = this;
-            moves++;
-            document.getElementById('moves').textContent = moves;
-            
-            checkForMatch();
-        }
+    function flipCard() {
+      if (lockBoard || this === firstCard || this.classList.contains("matched")) return;
+      
+      this.classList.add("flipped");
 
-        function checkForMatch() {
-            const isMatch = firstCard.dataset.number === secondCard.dataset.number;
-            
-            if (isMatch) {
-                disableCards();
-                matches++;
-                document.getElementById('matches').textContent = matches;
-                
-                if (matches === amendmentPairs.length) {
-                    setTimeout(() => {
-                        alert(`Congratulations! You completed the game in ${moves} moves!`);
-                    }, 500);
-                }
-            } else {
-                unflipCards();
-            }
-        }
+      if (!hasFlippedCard) {
+        hasFlippedCard = true;
+        firstCard = this;
+        return;
+      }
 
-        function disableCards() {
-            firstCard.removeEventListener('click', flipCard);
-            secondCard.removeEventListener('click', flipCard);
-            
-            resetBoard();
-        }
+      secondCard = this;
+      lockBoard = true;
+      moves++;
+      document.getElementById("moves").textContent = moves;
+      checkForMatch();
+    }
 
-        function unflipCards() {
-            lockBoard = true;
-            
-            setTimeout(() => {
-                firstCard.classList.remove('flipped');
-                secondCard.classList.remove('flipped');
-                
-                resetBoard();
-            }, 1000);
-        }
+    function checkForMatch() {
+      const isMatch = firstCard.dataset.id === secondCard.dataset.id;
+      
+      if (isMatch) {
+        handleMatch();
+      } else {
+        // Show both cards briefly before unflipping
+        setTimeout(() => {
+          firstCard.classList.remove("flipped");
+          secondCard.classList.remove("flipped");
+          resetBoard();
+        }, 1000);
+      }
+    }
 
-        function resetBoard() {
-            [hasFlippedCard, lockBoard] = [false, false];
-            [firstCard, secondCard] = [null, null];
-        }
+    function handleMatch() {
+      const id = firstCard.dataset.id;
+      displayAmendmentInfo(id);
+      firstCard.classList.add("matched");
+      secondCard.classList.add("matched");
+      firstCard.removeEventListener("click", flipCard);
+      secondCard.removeEventListener("click", flipCard);
+      resetBoard();
+      matches++;
+      document.getElementById("matches").textContent = matches;
+      
+      // Show celebration for last match
+      if (matches === amendmentData.length) {
+        setTimeout(() => {
+          document.getElementById("infoContent").innerHTML += `
+            <div class="info-highlight" style="animation: pulse 1s;">
+              🎉 Congratulations! You completed the game in ${moves} moves!
+            </div>
+          `;
+        }, 500);
+      }
+    }
 
-        function startGame() {
-            cards = [];
-            moves = 0;
-            matches = 0;
-            document.getElementById('moves').textContent = '0';
-            document.getElementById('matches').textContent = '0';
-            createCards();
-        }
+    function displayAmendmentInfo(id) {
+      const amendment = amendmentData.find(a => a.id === id);
+      const infoContent = document.getElementById("infoContent");
+      infoContent.innerHTML = `
+        <h3>${amendment.title}</h3>
+        <div class="info-highlight">${amendment.shortDesc}</div>
+        <p><strong>Key Provisions:</strong> ${amendment.description}</p>
+        <p><strong>Impact:</strong> ${amendment.impact}</p>
+      `;
+    }
 
-        // Initialize game
-        startGame();
-    </script>
-    <!-- Google Translate Script -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'hi,ta,te,ml,kn,gu,pa',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    function resetBoard() {
+      [hasFlippedCard, lockBoard] = [false, false];
+      [firstCard, secondCard] = [null, null];
+    }
+
+    function startGame() {
+      moves = 0;
+      matches = 0;
+      matchedPairs = [];
+      document.getElementById("moves").textContent = "0";
+      document.getElementById("matches").textContent = "0";
+      document.getElementById("infoContent").innerHTML = `
+        <p>Match two cards to reveal information about important constitutional amendments.</p>
+        <div class="info-highlight">Each match will display detailed information about the amendment.</div>
+      `;
+      createCards();
+    }
+
+    startGame();
+  </script>
 </body>
 </html>

@@ -10,8 +10,95 @@
     <link rel="icon" href="logo.jpg" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <title>Samvidhan</title>
-    
+    <style>
+        #sports-guru-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    z-index: 1000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .chat-header {
+    background: var(--primary);
+    color: rgb(10, 10, 10);
+    padding: 1rem;
+    border-radius: 12px 12px 0 0;
+    cursor: pointer;
+  }
+  
+  #chat-body {
+    height: 250px;
+    padding: 10px;
+    overflow-y: auto;
+    background: #f8f9fa;
+  }
+  
+  #chat-input {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-top: 1px solid #ddd;
+    border-radius: 0 0 12px 12px;
+  }
+  
+  .user-question {
+    background: var(--secondary);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 18px;
+    margin: 5px 0 5px auto;
+    max-width: 80%;
+    font-size: 0.9rem;
+  }
+  
+  .bot-answer {
+    background: white;
+    padding: 8px 12px;
+    border-radius: 18px;
+    margin: 5px auto 5px 0;
+    max-width: 80%;
+    border: 1px solid #ddd;
+    font-size: 0.9rem;
+  }
+  
+  .loading-dots {
+    display: inline-block;
+    padding-left: 12px;
+  }
+  
+  .loading-dots span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #aaa;
+    border-radius: 50%;
+    margin-right: 3px;
+    animation: bounce 1.4s infinite ease-in-out;
+  }
+  
+  .loading-dots span:nth-child(1) { animation-delay: 0s; }
+  .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+  
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-3px); }
+  }
+    </style>
 </head>
+<div id="sports-guru-widget">
+    <div class="chat-header">
+      <i class="fas fa-robot"></i> Sports Guru
+    </div>
+    <div class="chat-body" id="chat-body"></div>
+    <input type="text" id="chat-input" placeholder="Ask about sports..." onkeypress="if(event.key=='Enter') sendSportsQuestion()">
+  </div>
+  
 <body>
     <header>
         <div class="logo-container">
@@ -151,6 +238,63 @@
             <p>&copy; 2025 Samvidhan | Developed with ❤️ for India</p>
         </div>
     </footer>
+    <script>
+         const OPENROUTER_API_KEY = "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"; // Paste your key
+const OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions";
+
+async function sendSportsQuestion() {
+  const input = document.getElementById('chat-input');
+  const question = input.value.trim();
+  if (!question) return;
+
+  const chatBody = document.getElementById('chat-body');
+  
+  // Add user question
+  const userDiv = document.createElement('div');
+  userDiv.className = 'user-question';
+  userDiv.textContent = question;
+  chatBody.appendChild(userDiv);
+
+  // Add loading indicator
+  const loadingDiv = document.createElement('div');
+  loadingDiv.className = 'bot-answer';
+  loadingDiv.innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>';
+  chatBody.appendChild(loadingDiv);
+
+  input.value = '';
+  chatBody.scrollTop = chatBody.scrollHeight;
+
+  try {
+    const response = await fetch(OPENROUTER_API_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        'HTTP-Referer': 'http://127.0.0.1:5500', // Replace with your URL
+        'X-Title': 'Sports Hub', // Your app name
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: "mistralai/mistral-7b-instruct", // Free model
+        messages: [{
+          role: "system",
+          content: "You're a sports expert. Give concise answers under 100 words about rules, techniques, and history."
+        }, {
+          role: "user",
+          content: question
+        }]
+      })
+    });
+
+    const data = await response.json();
+    const answer = data.choices[0].message.content;
+    loadingDiv.innerHTML = answer;
+  } catch (error) {
+    loadingDiv.textContent = "Error: API limit reached or network issue. Try later.";
+  }
+
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+    </script>
 
     <script src="script.js"></script>
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
